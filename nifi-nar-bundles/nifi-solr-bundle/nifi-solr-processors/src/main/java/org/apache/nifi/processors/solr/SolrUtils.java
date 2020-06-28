@@ -433,7 +433,8 @@ public class SolrUtils {
                     LocalDateTime localDateTime = getLocalDateTimeFromEpochTime(fieldName, coercedValue);
                     addFieldToSolrDocument(inputDocument,fieldName,localDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)+'Z',fieldsToIndex);
                 } else {
-                    addFieldToSolrDocument(inputDocument,fieldName,LocalDateTime.parse(stringValue).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)+'Z',fieldsToIndex);
+                    DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    addFieldToSolrDocument(inputDocument,fieldName,LocalDateTime.parse(stringValue,df).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)+'Z',fieldsToIndex);
                 }
                 break;
             }
